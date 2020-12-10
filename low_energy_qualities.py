@@ -233,4 +233,6 @@ WMoA35 =  {'name':'WMoA35',
                      }
          }
 
-LEQuals = CCRI_LE+WMo
+WMoA = [WMoA23, WMoA28, WMoA30, WMoA35]
+
+LEQuals = CCRI_LE+WMo+ISO_H_LE+ISO_N_LE

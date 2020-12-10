@@ -9,18 +9,14 @@ Created on Fri Nov  6 15:55:21 2020
 import spekpy as sp
 import os 
 from matplotlib import pyplot as plt
-#import importlib
-import sys
+# import sys
 
 cwd = os.getcwd()  # Get the current working directory (cwd)
-sys.path.append(cwd) # Appending the current directory for module importing 
+dir_spec = os.path.join(cwd, 'spekpy_spectra') # for spectral outputs
+# sys.path.append(cwd) # Appending the current directory for module importing 
 
-from low_energy_qualities import *
-from medium_energy_qualities import *
-#importlib.reload(low_energy_qualities)
-
-
-dir_spec = os.path.join(cwd, 'spekpy_spectra')
+import low_energy_qualities as le
+import medium_energy_qualities as me
 
 def gen_spectrum(inputs, angle=30, mu_data='pene'):
     '''
@@ -30,8 +26,7 @@ def gen_spectrum(inputs, angle=30, mu_data='pene'):
     spectrum_inputs : Dict of input filtrations and applied voltage, in kV
         Keys include Mo, Al, Sn, Pb, Cu, and items are expressed in thickness (mm)
         Keys should aldo include the tube voltage, in kV
-        Keys should also include the anode angle
-        DESCRIPTION.
+        Keys should also include the anode angle.
 
     Returns a Spekpy spectrum object
     '''
@@ -61,16 +56,13 @@ def gen_spectrum(inputs, angle=30, mu_data='pene'):
     # if 'Air' in inputs['filters']:
     #     s.filter('Air', inputs['filters']['Air'])
     if 'mu_data' in inputs:
-        mu_data_source = inputs['mu_data']
+        s.mu_data_source = inputs['mu_data']
     if 'dk' in inputs:
         s.dk=inputs['dk']
     if 'angle' in inputs:
         s.angle= inputs['angle']
     return s
 
-
-
-# 
 # flt = (str(WMo28['filters'][key])+str(WMo28['filters'][val]) for key,val in WMo28['filters'].items())
 #(WMo28['filters'][key]+ WMo28['filters'][val] for key,val in WMo28['filters'].items())
 # spek_name = WMo28['name'] + (WMo28['filters'][key]+ WMo28['filters'][val] for key,val in WMo28['filters'].items()) + '.spec'
@@ -96,29 +88,45 @@ def spectrum_filename(dic):
         spek_name = dic['name'] + ' ' + str(dic['kV']) + 'kV' + name + '.spec'
     return spek_name
 
+# for qual in le.LEQuals:
+#     fname_qual = spectrum_filename(qual)
+#     s_qual = gen_spectrum(qual)
+#     s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), 
+#                            delim=',') # outputs spectrum to file for later uses
+#     karr, spkarr = s_qual.get_spectrum(edges=True)
+#     #le.LEQuals[qual]['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
+#     qual['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
+
 # Generating one spectra at a time, reading from the lists.
 
+for idx in range(len(le.LEQuals)): # Consideato 'code smell' in Python, ma chest'è.
+    fname_qual = spectrum_filename(le.LEQuals[idx])
+    s_qual = gen_spectrum(le.LEQuals[idx])
+    s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), 
+                           delim=',') # outputs spectrum to file for later uses
+    karr, spkarr = s_qual.get_spectrum(edges=True)
+    le.LEQuals[idx]['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
+    
+# sWMo28_name = spectrum_filename(le.WMo28)
+# sWMo28 = gen_spectrum(le.WMo28)
 
-sWMo28_name = spectrum_filename(WMo28)
-sWMo28 = gen_spectrum(WMo28)
+# sN100_name = spectrum_filename(me.N100)
+# sN100 = gen_spectrum(me.N100)
 
-sN100_name = spectrum_filename(N100)
-sN100 = gen_spectrum(N100)
+# karr, spkarr = sWMo28.get_spectrum(edges=True)
+# plt.plot(karr, spkarr)
+# plt.xlabel('Energy [keV]')
+# plt.ylabel('Fluence per mAs per unit energy [photons/cm2/mAs/keV]')
+# plt.title('ISO-IEC 61674 WMo28')
+# plt.show()
 
-karr, spkarr = sWMo28.get_spectrum(edges=True)
-plt.plot(karr, spkarr)
-plt.xlabel('Energy [keV]')
-plt.ylabel('Fluence per mAs per unit energy [photons/cm2/mAs/keV]')
-plt.title('ISO-IEC 61674 WMo28')
-plt.show()
+# karr, spkarr = sN100.get_spectrum(edges=True)
+# plt.plot(karr, spkarr)
+# plt.title('ISO 4037:2019 N100')
+# plt.show()
 
-karr, spkarr = sN100.get_spectrum(edges=True)
-plt.plot(karr, spkarr)
-plt.title('ISO 4037:2019 N100')
-plt.show()
-
-sWMo28.export_spectrum(file_name = os.path.join(dir_spec,sWMo28_name), delim=',')
-sN100.export_spectrum(file_name = os.path.join(dir_spec,sN100_name), delim=',')
+# sWMo28.export_spectrum(file_name = os.path.join(dir_spec,sWMo28_name), delim=',')
+# sN100.export_spectrum(file_name = os.path.join(dir_spec,sN100_name), delim=',')
 
 
 # s = sp.Spek(kvp=35,th=30, physics='spekcalc') # Generate a spectrum

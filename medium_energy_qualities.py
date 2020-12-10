@@ -397,3 +397,5 @@ CCRI_250 =  {'name':'CCRI-250', #3,26Al + 1,68Cu
              }
 
 CCRI_ME = [CCRI_100, CCRI_135, CCRI_180, CCRI_250]
+
+MEQuals = CCRI_ME+RQR+RQA+ISO_H_ME+ISO_W_ME+ISO_N_ME
