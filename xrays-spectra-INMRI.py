@@ -9,6 +9,7 @@ Created on Fri Nov  6 15:55:21 2020
 import spekpy as sp
 import os 
 from matplotlib import pyplot as plt
+import pandas as pd
 # import sys
 
 cwd = os.getcwd()  # Get the current working directory (cwd)
@@ -41,24 +42,10 @@ def gen_spectrum(inputs, angle=30, mu_data='pene'):
                 comment=inputs['name']) 
     filter_list = [(k, v) for k, v in inputs['filters'].items()] 
     s.multi_filter(filter_list)
-    # if 'Be' in inputs['filters']:
-    #     s.filter('Be', inputs['filters']['Be'])
-    # if 'Mo' in inputs['filters']:
-    #     s.filter('Mo', inputs['filters']['Mo'])
-    # if 'Pb' in inputs['filters']:
-    #     s.filter('Pb', inputs['filters']['Pb'])    
-    # if 'Sn' in inputs['filters']:
-    #     s.filter('Sn', inputs['filters']['Sn'])    
-    # if 'Cu' in inputs['filters']:
-    #     s.filter('Cu', inputs['filters']['Cu'])
-    # if 'Al' in inputs['filters']:
-    #     s.filter('Al', inputs['filters']['Al'])
-    # if 'Air' in inputs['filters']:
-    #     s.filter('Air', inputs['filters']['Air'])
     if 'mu_data' in inputs:
-        s.mu_data_source = inputs['mu_data']
+        s.set(mu_data_source = inputs['mu_data'])
     if 'dk' in inputs:
-        s.dk=inputs['dk']
+        s.set(dk=inputs['dk'])
     if 'angle' in inputs:
         s.angle= inputs['angle']
     return s
@@ -88,24 +75,30 @@ def spectrum_filename(dic):
         spek_name = dic['name'] + ' ' + str(dic['kV']) + 'kV' + name + '.spec'
     return spek_name
 
-# for qual in le.LEQuals:
-#     fname_qual = spectrum_filename(qual)
-#     s_qual = gen_spectrum(qual)
-#     s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), 
-#                            delim=',') # outputs spectrum to file for later uses
-#     karr, spkarr = s_qual.get_spectrum(edges=True)
-#     #le.LEQuals[qual]['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
-#     qual['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
+''' Generating one spectra at a time, reading from the lists.
+to avoid code smell, you could consider writing a quick function and then call 
+it by using
+list[:] = [fun(x) for x in list]
+see for example: https://stackoverflow.com/questions/4081217/how-to-modify-list-entries-during-for-loop
+'''
 
-# Generating one spectra at a time, reading from the lists.
+AllQualities = le.LEQuals+me.MEQuals
 
-for idx in range(len(le.LEQuals)): # Consideato 'code smell' in Python, ma chest'è.
-    fname_qual = spectrum_filename(le.LEQuals[idx])
-    s_qual = gen_spectrum(le.LEQuals[idx])
-    s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), 
-                           delim=',') # outputs spectrum to file for later uses
-    karr, spkarr = s_qual.get_spectrum(edges=True)
-    le.LEQuals[idx]['spectrum'] = (karr, spkarr) # Adds spectrum energy bins and frequencies to dict.
+for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma chest'è.
+    fname_qual = spectrum_filename(AllQualities[idx])
+    s_qual = gen_spectrum(AllQualities[idx])
+    AllQualities[idx]['spekpy_spectrum'] = s_qual
+    # s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), delim=',') 
+    ''' 
+    outputs spectrum to .spec file for later uses. Note that this includes
+    information such as HVL1, HVL2, mean energy etc 
+    ''' 
+    kbins, spk = s_qual.get_spectrum(edges=False) # returns mid-bin energy and freq.
+    AllQualities[idx]['spectrum_df'] = pd.DataFrame({'keV': kbins, 'freq': spk}, index = None)
+    AllQualities[idx]['spectrum_df'].to_csv(os.path.join(dir_spec,fname_qual+'.txt'), index=False, sep='\t')
+    
+    # Adds spectrum energy bins and frequencies to dict.
+ 
     
 # sWMo28_name = spectrum_filename(le.WMo28)
 # sWMo28 = gen_spectrum(le.WMo28)

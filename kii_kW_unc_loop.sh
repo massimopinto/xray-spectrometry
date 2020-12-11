@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/bin/bash
 
 #Created on Tue Nov  3 14:18:43 2020
 #@author: massimopinto

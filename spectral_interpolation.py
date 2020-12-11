@@ -24,8 +24,22 @@ def main():
     #script = sys.argv[0]
     input_data = sys.argv[1]
     spec = sys.argv[2]
+    mode = sys.argv[3]
+    
+    if mode not in ['edges', 'mids']: # Only two values of mode possible.
+        return print('Wrong mode specified. Must be edges or mids')
+    
     df_input_tab = pd.read_csv(cwd+"/"+input_data, index_col='keV')
     df_spec = pd.read_csv(cwd+"/"+spec, delim_whitespace=True, index_col='keV')
+    
+    E_mean = df_spec.index
+    
+    if mode == 'edges':
+        ''' Calculating the mean energy value of each bin '''
+        E_mean = (df_spec.index[0:-1] + df_spec.index[1:] ) /2.0
+        '''Appending the last bin energy value, whose frequency is zero'''
+        E_mean = E_mean.append(df_spec.index[-1:])
+    
     
     ''' Calculating the mean energy value of each bin '''
     E_mean = (df_spec.index[0:-1] + df_spec.index[1:] ) /2.0
