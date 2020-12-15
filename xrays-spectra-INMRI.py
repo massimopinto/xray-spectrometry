@@ -8,7 +8,7 @@ Created on Fri Nov  6 15:55:21 2020
 
 import spekpy as sp
 import os 
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 import pandas as pd
 # import sys
 
@@ -86,41 +86,26 @@ AllQualities = le.LEQuals+me.MEQuals
 
 for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma chest'è.
     fname_qual = spectrum_filename(AllQualities[idx])
-    s_qual = gen_spectrum(AllQualities[idx])
-    AllQualities[idx]['spekpy_spectrum'] = s_qual
+    s = gen_spectrum(AllQualities[idx])
+    AllQualities[idx]['spekpy_spectrum'] = s
     # s_qual.export_spectrum(file_name = os.path.join(dir_spec,fname_qual), delim=',') 
+    # Sopprimo l'expoert dello spectrum perché ignora il path di esportazione e contiene lo spettro intero
     ''' 
     outputs spectrum to .spec file for later uses. Note that this includes
     information such as HVL1, HVL2, mean energy etc 
     ''' 
-    kbins, spk = s_qual.get_spectrum(edges=False) # returns mid-bin energy and freq.
+    kbins, spk = s.get_spectrum(edges=False) # returns mid-bin energy and freq.
     AllQualities[idx]['spectrum_df'] = pd.DataFrame({'keV': kbins, 'freq': spk}, index = None)
     AllQualities[idx]['spectrum_df'].to_csv(os.path.join(dir_spec,fname_qual+'.txt'), index=False, sep='\t')
-    
-    # Adds spectrum energy bins and frequencies to dict.
+    AllQualities[idx]['HVL1'] = s.get_hvl1() # Get the 1st HVL in mm Al
+    AllQualities[idx]['HVL2'] = s.get_hvl2() # Get the 2nd HVL in mm Al
  
     
-# sWMo28_name = spectrum_filename(le.WMo28)
-# sWMo28 = gen_spectrum(le.WMo28)
-
-# sN100_name = spectrum_filename(me.N100)
-# sN100 = gen_spectrum(me.N100)
-
-# karr, spkarr = sWMo28.get_spectrum(edges=True)
 # plt.plot(karr, spkarr)
 # plt.xlabel('Energy [keV]')
 # plt.ylabel('Fluence per mAs per unit energy [photons/cm2/mAs/keV]')
 # plt.title('ISO-IEC 61674 WMo28')
 # plt.show()
-
-# karr, spkarr = sN100.get_spectrum(edges=True)
-# plt.plot(karr, spkarr)
-# plt.title('ISO 4037:2019 N100')
-# plt.show()
-
-# sWMo28.export_spectrum(file_name = os.path.join(dir_spec,sWMo28_name), delim=',')
-# sN100.export_spectrum(file_name = os.path.join(dir_spec,sN100_name), delim=',')
-
 
 # s = sp.Spek(kvp=35,th=30, physics='spekcalc') # Generate a spectrum
 # s.filter('Be', 1) # Filter by 1 mm of Beryllium, our low energy x-ray tube
@@ -128,7 +113,6 @@ for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma ch
 # #s.filter('Al', 4.72) # Filter by 1 mm of Beryllium
 # s.filter('Air', 500) # Spectrum is sought at 500mm from the focus
 #s.set(z=50)
-
 
 # hvl1 = s.get_hvl1() # Get the 1st HVL in mm Al
 # hvl2 = s.get_hvl2()
