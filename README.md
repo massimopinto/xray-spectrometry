@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This **Python 3**-based project uses the package spekpy to generate x-ray specta, while the HpGe detector is not yet fully functional. `Spekpy` can be found at [https://bitbucket.org/spekpy/spekpy_release/](https://bitbucket.org/spekpy/spekpy_release/)
+This **Python 3**-based project uses the package spekpy to generate x-ray specta, while the HpGe detector is not yet fully functional. `Spekpy` can be found at [https://bitbucket.org/spekpy/spekpy_release/](https://bitbucket.org/spekpy/spekpy_release/) [1]
 
 ### Package content
 You will find 
@@ -15,4 +15,11 @@ You will find
 
 ### Package development
 At the begininning of developing this repository, spectra were generated one at a time using SpekCalc. This was later superseded by spekpy, which allows scripting other than expanding the physics to Molybdenum filtrations, which is needed for mammography qualities.  
-This code will move towards the (re)implementation of x-ray spectrometry at ENEA-INMRI with our new HpGe spectrometer, obtained in 2019.  
+This code will move towards the (re)implementation of x-ray spectrometry at ENEA-INMRI with our new HpGe spectrometer, obtained in 2019. 
+To do: 
+1. Monte Carlo model of the detector and calculation of the response matrix
+2. deconvolution code, based on the 'stripping' technique [2].
+
+### References
+1. Bujila R, Omar A and Poludniowski G 2020 A validation of SpekPy: a software toolkit for modelling X-ray tube spectra Physica Medica: European Journal of Medical Physics 75 44–54
+2. Plagnard J 2017 Mesure de spectres en énergie de l’émission de tubes à rayons X au LNE-LNHB/LMD R. franç. métrol. 37–47

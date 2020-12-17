@@ -10,6 +10,8 @@ import spekpy as sp
 import os 
 # from matplotlib import pyplot as plt
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as pyplt
 # import sys
 
 cwd = os.getcwd()  # Get the current working directory (cwd)
@@ -85,6 +87,7 @@ see for example: https://stackoverflow.com/questions/4081217/how-to-modify-list-
 AllQualities = le.LEQuals+me.MEQuals
 
 for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma chest'è.
+    # Poi se vuoi abbellirlo puoi provare con un metodo basato sulla list comprehension
     fname_qual = spectrum_filename(AllQualities[idx])
     s = gen_spectrum(AllQualities[idx])
     AllQualities[idx]['spekpy_spectrum'] = s
@@ -97,10 +100,65 @@ for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma ch
     kbins, spk = s.get_spectrum(edges=False) # returns mid-bin energy and freq.
     AllQualities[idx]['spectrum_df'] = pd.DataFrame({'keV': kbins, 'freq': spk}, index = None)
     AllQualities[idx]['spectrum_df'].to_csv(os.path.join(dir_spec,fname_qual+'.txt'), index=False, sep='\t')
-    AllQualities[idx]['HVL1'] = s.get_hvl1() # Get the 1st HVL in mm Al
-    AllQualities[idx]['HVL2'] = s.get_hvl2() # Get the 2nd HVL in mm Al
- 
-    
+    AllQualities[idx]['HVL1_Al_spekpy'] = s.get_hvl1() # Get the 1st HVL in mm Al
+    AllQualities[idx]['HVL2_Al_spekpy'] = s.get_hvl2() # Get the 2nd HVL in mm Al
+    AllQualities[idx]['HVL1_Cu_spekpy'] = s.get_hvl1(matl='Cu') # Get the 1st HVL in mm Cu
+    AllQualities[idx]['HVL2_Cu_spekpy'] = s.get_hvl2(matl='Cu') # Get the 2nd HVL in mm Cu
+    AllQualities[idx]['mean_E'] = s.get_emean()
+
+'''
+Adesso ci sarebbe da fare un grafico a faccette con matplotlib
+Dovresti recuperarlo da dove lo hai usato di più, i run calorimetrici.
+'''
+
+dfAllQualities = pd.concat([pd.Series(AllQualities[idx]) for idx in range(len(AllQualities))], axis=1)
+dfAllQualities = dfAllQualities.transpose()
+dfAllQualities.drop(columns=['spekpy_spectrum', 'spectrum_df'], inplace=True)
+#print(dfAllQualities)
+
+dfAllQualities.to_csv(os.path.join(cwd,'spekpy_qualities_summary.csv'), index=False, sep=',')
+
+def plot_spectra(dict_list,cols=5,maxrows=4):
+    '''
+    Function for plotting spectra in factes. 
+
+    Parameters
+    ----------
+    dict_list : list of dictionary elements
+        Each dictionary (list element) can contain several keys, such as: 
+        dict_keys(['name', 'kV', 'physics', 'dk', 'filters', 
+                   'spekpy_spectrum', 'spectrum_df', 'HVL1_Al_spekpy', 
+                   'HVL2_Al_spekpy', 'HVL1_Cu_spekpy', 'HVL2_Cu_spekpy', 
+                   'mean_E'])   
+        which will be used in the plot facet. Each plot is based on the content
+        of the key 'spectrum_df', which is a dataframe with two columns vectors.
+        Here, the 'keV' column is the x-axis (energy values) and the 'freq' column 
+        is the y-axis, i.e. the spectrum data.
+
+    Returns
+    -------
+    A matplotlib figure and axes object
+    '''
+    numplots = len(dict_list) # How many plots you need?
+    #cols = 5         # number of columns
+    #maxrows = 4
+    numfigs = int(np.ceil(numplots/(maxrows*cols))) # How many figures?
+    subfigure = 1 + np.arange(numfigs)
+    ''' separate the dictionary list in 'numfigs' chunks'''
+    run_dic_chunks = [dict_list[i:i + maxrows*cols] \
+                  for i in range(0, len(dict_list), maxrows*cols)]
+    numsubplots = []
+    for chunk in run_dic_chunks:
+        numsubplots.append(len(chunk))
+    figtitle = "ENEA-INMRI x-ray spectra simulated using spekpy"
+    fig, axes = pyplt.subplots(nrows=maxrows, ncols=cols)
+    fig.subplots_adjust(hspace=0.35, wspace=0.25)
+    fig.set_size_inches(20, 10)
+    fig.suptitle(figtitle, fontsize=15)
+    return fig
+
+figure = plot_spectra(AllQualities[:10])
+pyplt.show()    
 # plt.plot(karr, spkarr)
 # plt.xlabel('Energy [keV]')
 # plt.ylabel('Fluence per mAs per unit energy [photons/cm2/mAs/keV]')

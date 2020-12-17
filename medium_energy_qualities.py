@@ -8,7 +8,7 @@ Created on Wed Dec  2 14:32:48 2020
 
 # Medium energy x-ray spectra
 
-N60 =   {'name':'N60',
+N60 =   {'name':'N-60',
          'kV': 60,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
@@ -18,7 +18,7 @@ N60 =   {'name':'N60',
                      }
          }
 
-N80 =   {'name':'N80',
+N80 =   {'name':'N-80',
          'kV': 80,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
@@ -28,7 +28,7 @@ N80 =   {'name':'N80',
                      }
          }
 
-N100 =  {'name':'N100',
+N100 =  {'name':'N-100',
          'kV': 100,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -38,7 +38,7 @@ N100 =  {'name':'N100',
                      }
          }
 
-N120 =  {'name':'N120',
+N120 =  {'name':'N-120',
          'kV': 120,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -49,7 +49,7 @@ N120 =  {'name':'N120',
                      }
          }
 
-N150 =  {'name':'N150',
+N150 =  {'name':'N-150',
          'kV': 150,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -59,7 +59,7 @@ N150 =  {'name':'N150',
                      }
          }
  
-N200 =  {'name':'N200', # 4,18 Al+2,02 Cu+3,0Sn+1,0Pb
+N200 =  {'name':'N-200', # 4,18 Al+2,02 Cu+3,0Sn+1,0Pb
          'kV': 200,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -71,7 +71,7 @@ N200 =  {'name':'N200', # 4,18 Al+2,02 Cu+3,0Sn+1,0Pb
                      }
          }
 
-N250 =  {'name':'N250', #4,17 Al + 2,0 Sn + 3,0 Pb
+N250 =  {'name':'N-250', #4,17 Al + 2,0 Sn + 3,0 Pb
          'kV': 250,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -82,7 +82,7 @@ N250 =  {'name':'N250', #4,17 Al + 2,0 Sn + 3,0 Pb
                      }
          }
 
-N300 =  {'name':'N300', #3,74 Al + 3,1 Sn + 5,0 Pb
+N300 =  {'name':'N-300', #3,74 Al + 3,1 Sn + 5,0 Pb
          'kV': 300,
          'physics':'casim',
          'dk': 1, #energy bin width,
@@ -243,7 +243,7 @@ RQA10 =  {'name':'RQA10', #4,72  Al + 45 Al
 
 RQA = [RQA2, RQA3, RQA5, RQA7, RQA9, RQA10]
 
-W60 =  {'name':'W60', #3,97 Al + 0,27 Cu
+W60 =  {'name':'W-60', #3,97 Al + 0,27 Cu
          'kV': 60,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
@@ -253,7 +253,7 @@ W60 =  {'name':'W60', #3,97 Al + 0,27 Cu
                      }
          }
 
-W80 =  {'name':'W80', #4,18 Al + 0,49 Cu
+W80 =  {'name':'W-80', #4,18 Al + 0,49 Cu
          'kV': 80,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
@@ -263,7 +263,7 @@ W80 =  {'name':'W80', #4,18 Al + 0,49 Cu
                      }
          }
 
-W110 =  {'name':'W110', #4,18 Al + 2,04 Cu
+W110 =  {'name':'W-110', #4,18 Al + 2,04 Cu
          'kV': 110,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -273,7 +273,7 @@ W110 =  {'name':'W110', #4,18 Al + 2,04 Cu
                      }
          }
 
-W150 =  {'name':'W150', #4,16 Al + 1,0 Sn
+W150 =  {'name':'W-150', #4,16 Al + 1,0 Sn
          'kV': 150,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -283,7 +283,7 @@ W150 =  {'name':'W150', #4,16 Al + 1,0 Sn
                      }
          }
 
-W200 =  {'name':'W200', #4,19 Al + 2,0 Sn
+W200 =  {'name':'W-200', #4,19 Al + 2,0 Sn
          'kV': 200,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -293,7 +293,7 @@ W200 =  {'name':'W200', #4,19 Al + 2,0 Sn
                      }
          }
 
-W250 =  {'name':'W250', #4,18 Al + 4,0 Sn
+W250 =  {'name':'W-250', #4,18 Al + 4,0 Sn
          'kV': 250,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -303,7 +303,7 @@ W250 =  {'name':'W250', #4,18 Al + 4,0 Sn
                      }
          }  
 
-W300 =  {'name':'W300', #4,18 Al + 6,5 Sn
+W300 =  {'name':'W-300', #4,18 Al + 6,5 Sn
          'kV': 250,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -315,7 +315,7 @@ W300 =  {'name':'W300', #4,18 Al + 6,5 Sn
 
 ISO_W_ME = [W60, W80, W110, W150, W200, W250, W300]
 
-H100 =  {'name':'H100', #4,27 Al + 0,15 Cu
+H100 =  {'name':'H-100', #4,27 Al + 0,15 Cu
          'kV': 100,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -325,7 +325,7 @@ H100 =  {'name':'H100', #4,27 Al + 0,15 Cu
                      }
          }
 
-H200 =  {'name':'H200', #4,26 Al + 1,11 Cu
+H200 =  {'name':'H-200', #4,26 Al + 1,11 Cu
          'kV': 200,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -335,7 +335,7 @@ H200 =  {'name':'H200', #4,26 Al + 1,11 Cu
                      }
          }
 
-H250 =  {'name':'H250', #4,18 Al + 1,63 Cu
+H250 =  {'name':'H-250', #4,18 Al + 1,63 Cu
          'kV': 250,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
@@ -345,7 +345,7 @@ H250 =  {'name':'H250', #4,18 Al + 1,63 Cu
                      }
          }
 
-H300 =  {'name':'H300', #4,18 Al + 2,21 Cu
+H300 =  {'name':'H-300', #4,18 Al + 2,21 Cu
          'kV': 300,
          'physics':'casim',
          'dk': 1.0, #energy bin width,

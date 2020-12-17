@@ -19,7 +19,7 @@ CCRI10 =  {'name':'CCRI-10',
 
 CCRI25 =  {'name':'CCRI-25',
             'kV': 25,
-            'physics':'spekcalc',
+            'physics':'casim',
             'dk': 0.2, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                         'Al':0.43,
@@ -29,7 +29,7 @@ CCRI25 =  {'name':'CCRI-25',
 
 CCRI30 =  {'name':'CCRI-30',
             'kV': 30,
-            'physics':'spekcalc',
+            'physics':'casim',
             'dk': 0.2, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                         'Al':0.26,
@@ -39,7 +39,7 @@ CCRI30 =  {'name':'CCRI-30',
 
 CCRI50a =  {'name':'CCRI-50a',
             'kV': 50,
-            'physics':'spekcalc',
+            'physics':'casim',
             'dk': 0.5, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                         'Al':4.72,
@@ -49,7 +49,7 @@ CCRI50a =  {'name':'CCRI-50a',
 
 CCRI50b =  {'name':'CCRI-50b',
             'kV': 50,
-            'physics':'spekcalc',
+            'physics':'casim',
             'dk': 0.5, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                         'Al':1.07,
@@ -59,7 +59,7 @@ CCRI50b =  {'name':'CCRI-50b',
 
 CCRI_LE = [CCRI10, CCRI25, CCRI30, CCRI50a, CCRI50b]
 
-N10 =  {'name':'N10',
+N10 =  {'name':'N-10',
          'kV': 10,
          'physics':'spekcalc',
          'dk': 0.2, #energy bin width,
@@ -69,7 +69,7 @@ N10 =  {'name':'N10',
                      }
          }
 
-N15 =  {'name':'N15',
+N15 =  {'name':'N-15',
          'kV': 15,
          'physics':'spekcalc',
          'dk': 0.2, #energy bin width,
@@ -79,9 +79,9 @@ N15 =  {'name':'N15',
                      }
          }
 
-N20 =  {'name':'N20',
+N20 =  {'name':'N-20',
          'kV': 20,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 1.9, 
@@ -89,9 +89,9 @@ N20 =  {'name':'N20',
                      }
          }
 
-N25 =  {'name':'N25',
+N25 =  {'name':'N-25',
          'kV': 25,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 2.0, 
@@ -99,9 +99,9 @@ N25 =  {'name':'N25',
                      }
          }
 
-N30 =  {'name':'N30',
+N30 =  {'name':'N-30',
          'kV': 30,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 5.5, 
@@ -109,9 +109,9 @@ N30 =  {'name':'N30',
                      }
          }
 
-N40 =  {'name':'N40',
+N40 =  {'name':'N-40',
          'kV': 40,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 4.0,
@@ -122,9 +122,9 @@ N40 =  {'name':'N40',
 
 ISO_N_LE = [N10, N15, N20, N25, N30, N40]
 
-H20 =  {'name':'H20',
+H20 =  {'name':'H-20',
          'kV': 20,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 0.15, 
@@ -132,9 +132,9 @@ H20 =  {'name':'H20',
                      }
          }
 
-H30 =  {'name':'H30',
+H30 =  {'name':'H-30',
          'kV': 30,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Al': 0.52, 
@@ -147,9 +147,9 @@ ISO_H_LE = [H20, H30]
 
  
 
-WMo23 =  {'name':'WMo23',
+WMo23 =  {'name':'WMo-23',
          'kV': 23,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -157,9 +157,9 @@ WMo23 =  {'name':'WMo23',
                      }
          }
 
-WMo28 =  {'name':'WMo28',
+WMo28 =  {'name':'WMo-28',
          'kV': 28,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -167,9 +167,9 @@ WMo28 =  {'name':'WMo28',
                      }
          }
 
-WMo30 =  {'name':'WMo30',
+WMo30 =  {'name':'WMo-30',
          'kV': 30,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -177,9 +177,9 @@ WMo30 =  {'name':'WMo30',
                      }
          }
 
-WMo35 =  {'name':'WMo35',
+WMo35 =  {'name':'WMo-35',
          'kV': 35,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -189,9 +189,9 @@ WMo35 =  {'name':'WMo35',
 
 WMo = [WMo23, WMo28, WMo30, WMo35]
 
-WMoA23 =  {'name':'WMoA23',
+WMoA23 =  {'name':'WMoA-23',
          'kV': 23,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -200,9 +200,9 @@ WMoA23 =  {'name':'WMoA23',
                      }
          }
 
-WMoA28 =  {'name':'WMoA28',
+WMoA28 =  {'name':'WMoA-28',
          'kV': 28,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -211,9 +211,9 @@ WMoA28 =  {'name':'WMoA28',
                      }
          }
 
-WMoA30 =  {'name':'WMoA30',
+WMoA30 =  {'name':'WMoA-30',
          'kV': 30,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06,
@@ -222,9 +222,9 @@ WMoA30 =  {'name':'WMoA30',
                      }
          }
 
-WMoA35 =  {'name':'WMoA35',
+WMoA35 =  {'name':'WMoA-35',
          'kV': 35,
-         'physics':'spekcalc',
+         'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
                      'Mo': 0.06, 
@@ -235,4 +235,4 @@ WMoA35 =  {'name':'WMoA35',
 
 WMoA = [WMoA23, WMoA28, WMoA30, WMoA35]
 
-LEQuals = CCRI_LE+WMo+ISO_H_LE+ISO_N_LE
+LEQuals = CCRI_LE+WMo+WMoA+ISO_H_LE+ISO_N_LE

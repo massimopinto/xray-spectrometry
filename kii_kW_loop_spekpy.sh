@@ -7,8 +7,8 @@
 
 
 for file in ./spekpy_spectra/*.txt
-subfile =${file:17:}
-echo $subStr
+#subfile=${file}
+#echo $subfile
 do
     [ -f "$file" ] || continue
     python3 ./spectral_interpolation.py ./k_w-k_ii_data_set_ICRU90.csv "$file" mids >> kii_kW_spekpy.csv
