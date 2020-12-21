@@ -140,8 +140,8 @@ def plot_spectra(dict_list,cols=5,maxrows=4):
     A matplotlib figure and axes object
     '''
     numplots = len(dict_list) # How many plots you need?
-    #cols = 5         # number of columns
-    #maxrows = 4
+    cols = cols         # number of columns
+    maxrows = maxrows
     numfigs = int(np.ceil(numplots/(maxrows*cols))) # How many figures?
     subfigure = 1 + np.arange(numfigs)
     ''' separate the dictionary list in 'numfigs' chunks'''
@@ -155,9 +155,24 @@ def plot_spectra(dict_list,cols=5,maxrows=4):
     fig.subplots_adjust(hspace=0.35, wspace=0.25)
     fig.set_size_inches(20, 10)
     fig.suptitle(figtitle, fontsize=15)
-    return fig
+    for run_dic, ax in zip(chunk, axes.flatten()):
+        ax.text(0.01, 0.9, str(run_dic['name']) + ", <E>: "+ \
+                str(run_dic['mean_E'])[:4]+ " keV",
+                transform=ax.transAxes, horizontalalignment='left')
+        # ax.text(0.01, 0.8, "<E>: "+ str(run_dic['mean_E'])[:4]+ " keV", 
+        #         transform=ax.transAxes, horizontalalignment='left')
+        ax.plot(run_dic['spectrum_df']['keV'], run_dic['spectrum_df']['freq'],
+                color='black', linewidth=2.0)
+        if ax == axes.flatten()[0]:
+            ax.set_ylabel("frequency")  # y axis label on the first axes only
+        #if cols*maxrows > subplots:
+        #    for ax in axes.flatten()[subplots:]:
+        #        ax.remove()  # ax.set_visible(False)
+        #axes.flatten()[subplots-1].set_xlabel("Energy [keV]")  # x axis label \
+    return fig, axes
 
-figure = plot_spectra(AllQualities[:10])
+figure, axes = plot_spectra(AllQualities[:10])
+figure.savefig(cwd+"/"+"test_spectra_facets" + ".png")
 pyplt.show()    
 # plt.plot(karr, spkarr)
 # plt.xlabel('Energy [keV]')
