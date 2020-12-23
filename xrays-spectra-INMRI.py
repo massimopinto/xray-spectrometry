@@ -11,6 +11,8 @@ import os
 # from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.rcParams['text.usetex'] = True
 import matplotlib.pyplot as pyplt
 # import sys
 
@@ -84,6 +86,9 @@ list[:] = [fun(x) for x in list]
 see for example: https://stackoverflow.com/questions/4081217/how-to-modify-list-entries-during-for-loop
 '''
 
+def scarto_rel(a,b):
+    return np.abs(a-b) / np.min([a,b])
+
 AllQualities = le.LEQuals+me.MEQuals
 
 for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma chest'è.
@@ -105,6 +110,13 @@ for idx in range(len(AllQualities)): # Considerato 'code smell' in Python, ma ch
     AllQualities[idx]['HVL1_Cu_spekpy'] = s.get_hvl1(matl='Cu') # Get the 1st HVL in mm Cu
     AllQualities[idx]['HVL2_Cu_spekpy'] = s.get_hvl2(matl='Cu') # Get the 2nd HVL in mm Cu
     AllQualities[idx]['mean_E'] = s.get_emean()
+    AllQualities[idx]['HVL_deviation'] = np.nan
+    if ('HVL_Cu_DB' in  AllQualities[idx].keys()):
+        AllQualities[idx]['HVL_deviation'] = scarto_rel(AllQualities[idx]['HVL_Cu_DB'],
+                                                        AllQualities[idx]['HVL1_Cu_spekpy'])
+    if ('HVL_Al_DB' in  AllQualities[idx].keys()):
+        AllQualities[idx]['HVL_deviation'] = scarto_rel(AllQualities[idx]['HVL_Al_DB'],
+                                                        AllQualities[idx]['HVL1_Al_spekpy'])
 
 '''
 Adesso ci sarebbe da fare un grafico a faccette con matplotlib
@@ -121,7 +133,6 @@ dfAllQualities.to_csv(os.path.join(cwd,'spekpy_qualities_summary.csv'), index=Fa
 def plot_spectra(dict_list,cols=5,maxrows=4):
     '''
     Function for plotting spectra in factes. 
-
     Parameters
     ----------
     dict_list : list of dictionary elements
@@ -134,10 +145,9 @@ def plot_spectra(dict_list,cols=5,maxrows=4):
         of the key 'spectrum_df', which is a dataframe with two columns vectors.
         Here, the 'keV' column is the x-axis (energy values) and the 'freq' column 
         is the y-axis, i.e. the spectrum data.
-
     Returns
     -------
-    A matplotlib figure and axes object
+    A list of tuples containing (figures and their axes)
     '''
     numplots = len(dict_list) # How many plots you need?
     cols = cols         # number of columns
@@ -148,54 +158,35 @@ def plot_spectra(dict_list,cols=5,maxrows=4):
     run_dic_chunks = [dict_list[i:i + maxrows*cols] \
                   for i in range(0, len(dict_list), maxrows*cols)]
     numsubplots = []
+    props = dict(boxstyle='round', facecolor='white', edgecolor='black', alpha=0.9)
     for chunk in run_dic_chunks:
         numsubplots.append(len(chunk))
     figtitle = "ENEA-INMRI x-ray spectra simulated using spekpy"
-    fig, axes = pyplt.subplots(nrows=maxrows, ncols=cols)
-    fig.subplots_adjust(hspace=0.35, wspace=0.25)
-    fig.set_size_inches(20, 10)
-    fig.suptitle(figtitle, fontsize=15)
-    for run_dic, ax in zip(chunk, axes.flatten()):
-        ax.text(0.01, 0.9, str(run_dic['name']) + ", <E>: "+ \
-                str(run_dic['mean_E'])[:4]+ " keV",
-                transform=ax.transAxes, horizontalalignment='left')
-        # ax.text(0.01, 0.8, "<E>: "+ str(run_dic['mean_E'])[:4]+ " keV", 
-        #         transform=ax.transAxes, horizontalalignment='left')
-        ax.plot(run_dic['spectrum_df']['keV'], run_dic['spectrum_df']['freq'],
-                color='black', linewidth=2.0)
-        if ax == axes.flatten()[0]:
-            ax.set_ylabel("frequency")  # y axis label on the first axes only
-        #if cols*maxrows > subplots:
-        #    for ax in axes.flatten()[subplots:]:
-        #        ax.remove()  # ax.set_visible(False)
-        #axes.flatten()[subplots-1].set_xlabel("Energy [keV]")  # x axis label \
-    return fig, axes
+    output_figures = []
+    for chunk, subf, subplots in zip(run_dic_chunks, subfigure, numsubplots):
+        fig, axes = pyplt.subplots(nrows=maxrows, ncols=cols)
+        fig.subplots_adjust(hspace=0.35, wspace=0.25)
+        fig.set_size_inches(20, 10)
+        fig.suptitle(figtitle, fontsize=15)
+        for run_dic, ax in zip(chunk, axes.flatten()):
+            ax.text(0.05, 0.89, str(run_dic['name']) + r", $\bar{E}$:"+ \
+                str(run_dic['mean_E'])[:4]+ " keV, HVL dev:" + \
+                    str(run_dic['HVL_deviation'])[:6],
+                transform=ax.transAxes, horizontalalignment='left', 
+                bbox=props)
+            # ax.text(0.01, 0.8, "<E>: "+ str(run_dic['mean_E'])[:4]+ " keV", 
+            #         transform=ax.transAxes, horizontalalignment='left')
+            ax.plot(run_dic['spectrum_df']['keV'], run_dic['spectrum_df']['freq'],
+                    color='black', linewidth=2.0)
+            if ax == axes.flatten()[0]:
+                ax.set_ylabel("frequency")  # y axis label on the first axes only
+            #if cols*maxrows > subplots:
+            #    for ax in axes.flatten()[subplots:]:
+            #        ax.remove()  # ax.set_visible(False)
+            #axes.flatten()[subplots-1].set_xlabel("Energy [keV]")  # x axis label \
+            output_figures.append((fig, axes))
+        fig.savefig(cwd+"/"+"test_spectra_facets_" + str(subf)+".png")
+    return output_figures
 
-figure, axes = plot_spectra(AllQualities[:10])
-figure.savefig(cwd+"/"+"test_spectra_facets" + ".png")
-pyplt.show()    
-# plt.plot(karr, spkarr)
-# plt.xlabel('Energy [keV]')
-# plt.ylabel('Fluence per mAs per unit energy [photons/cm2/mAs/keV]')
-# plt.title('ISO-IEC 61674 WMo28')
-# plt.show()
-
-# s = sp.Spek(kvp=35,th=30, physics='spekcalc') # Generate a spectrum
-# s.filter('Be', 1) # Filter by 1 mm of Beryllium, our low energy x-ray tube
-# s.filter('Mo', 0.06) # Filter by 60 um of Molybdenum
-# #s.filter('Al', 4.72) # Filter by 1 mm of Beryllium
-# s.filter('Air', 500) # Spectrum is sought at 500mm from the focus
-#s.set(z=50)
-
-# hvl1 = s.get_hvl1() # Get the 1st HVL in mm Al
-# hvl2 = s.get_hvl2()
-
-# print("HVL1: " + str(hvl1)) # Print out the HVL value (Python3 syntax)
-# print("HVL2: " + str(hvl2)) # Print out the HVL value (Python3 syntax)
-# A series of quick-access functions
-# s.get_k()  # energy bins
-# s.get_spk()
-# s.get_spectrum()
-# s.summarize()
-# s.export_spectrum(file_name=cwd+'/WMo35 35kVp 30deg 500Air 1Be 0.06Mo-legacy.spc', 
-                   # comment=None, delim=',')
+# figure, axes = plot_spectra(AllQualities[:10])
+figures = plot_spectra(AllQualities)

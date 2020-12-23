@@ -12,6 +12,12 @@ You will find
 - a couple of bash scripts `.sh` to run `spectral_interpolation.py` over all input spectra files that are stored in a directory. Just run `bash kii_kW_loop_spekpy.sh` at your shell prompt. In this example, the dataset to use for averaging is the following.
 - The `k_w-k_ii_data_set_ICRU90.csv` dataset containing the kii*kW correction factors, as listed on the ICRU 90 report.
 
+### Running scipts
+
+- `xrays-spectra-INMRI.py` yields:
+1.  a `spekpy_qualities_summary.csv` file containing calculations, using `spekpy` of mean energy, first and second HVL values (both in Al and Cu), and compares these calculated values to those that are stored in the ENEA-INMRI dosimetry database (HVL_dev)
+2. a series of figures with all calculated spectra, faceted by beam quality, like this:
+![some sample spectra generated using SpekPy](./test_spectra_facets_1.png) 
 
 ### Package development
 At the begininning of developing this repository, spectra were generated one at a time using SpekCalc. This was later superseded by spekpy, which allows scripting other than expanding the physics to Molybdenum filtrations, which is needed for mammography qualities.  

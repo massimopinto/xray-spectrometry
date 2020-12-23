@@ -10,6 +10,7 @@ Created on Wed Dec  2 14:32:48 2020
 
 N60 =   {'name':'N-60',
          'kV': 60,
+         'HVL_Cu_DB' : 0.24,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':4.02,
@@ -20,6 +21,7 @@ N60 =   {'name':'N-60',
 
 N80 =   {'name':'N-80',
          'kV': 80,
+         'HVL_Cu_DB' : 0.58,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.99,
@@ -30,6 +32,7 @@ N80 =   {'name':'N-80',
 
 N100 =  {'name':'N-100',
          'kV': 100,
+         'HVL_Cu_DB' : 1.12,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':4.04,
@@ -40,6 +43,7 @@ N100 =  {'name':'N-100',
 
 N120 =  {'name':'N-120',
          'kV': 120,
+         'HVL_Cu_DB' : 1.69,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':3.99,
@@ -51,6 +55,7 @@ N120 =  {'name':'N-120',
 
 N150 =  {'name':'N-150',
          'kV': 150,
+         'HVL_Cu_DB' : 2.37,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':4.0,
@@ -61,6 +66,7 @@ N150 =  {'name':'N-150',
  
 N200 =  {'name':'N-200', # 4,18 Al+2,02 Cu+3,0Sn+1,0Pb
          'kV': 200,
+         'HVL_Cu_DB' : 4.0,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':4.18,
@@ -73,6 +79,7 @@ N200 =  {'name':'N-200', # 4,18 Al+2,02 Cu+3,0Sn+1,0Pb
 
 N250 =  {'name':'N-250', #4,17 Al + 2,0 Sn + 3,0 Pb
          'kV': 250,
+         'HVL_Cu_DB' : 5.15,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':4.17,
@@ -84,6 +91,7 @@ N250 =  {'name':'N-250', #4,17 Al + 2,0 Sn + 3,0 Pb
 
 N300 =  {'name':'N-300', #3,74 Al + 3,1 Sn + 5,0 Pb
          'kV': 300,
+         'HVL_Cu_DB' : 6.04,
          'physics':'casim',
          'dk': 1, #energy bin width,
          'filters': {'Al':3.74,
@@ -97,6 +105,7 @@ ISO_N_ME = [N60, N80, N100, N120, N150, N200, N250, N300]
 
 RQR2 =  {'name':'RQR2',
          'kV': 40,
+         'HVL_Al_DB' : 1.42,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':2.7,
@@ -106,6 +115,7 @@ RQR2 =  {'name':'RQR2',
 
 RQR3 =  {'name':'RQR3',
          'kV': 50,
+         'HVL_Al_DB' : 1.76,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':2.59,
@@ -115,6 +125,7 @@ RQR3 =  {'name':'RQR3',
 
 RQR4 =  {'name':'RQR4',
          'kV': 60,
+         'HVL_Al_DB' : 2.18,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':2.88,
@@ -124,6 +135,7 @@ RQR4 =  {'name':'RQR4',
 
 RQR5 =  {'name':'RQR5',
          'kV': 70,
+         'HVL_Al_DB' : 2.60,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.19,
@@ -133,6 +145,7 @@ RQR5 =  {'name':'RQR5',
 
 RQR6 =  {'name':'RQR6',
          'kV': 80,
+         'HVL_Al_DB' : 3.03,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.39,
@@ -142,6 +155,7 @@ RQR6 =  {'name':'RQR6',
 
 RQR7 =  {'name':'RQR7',
          'kV': 90,
+         'HVL_Al_DB' : 3.47,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.57,
@@ -151,6 +165,7 @@ RQR7 =  {'name':'RQR7',
 
 RQR8 =  {'name':'RQR8',
          'kV': 100,
+         'HVL_Al_DB' : 3.95,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.70,
@@ -160,6 +175,7 @@ RQR8 =  {'name':'RQR8',
 
 RQR9 =  {'name':'RQR9',
          'kV': 120,
+         'HVL_Al_DB' : 4.99,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.13,
@@ -169,6 +185,7 @@ RQR9 =  {'name':'RQR9',
 
 RQR10 =  {'name':'RQR10',
          'kV': 150,
+         'HVL_Al_DB' : 6.55,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.72,
@@ -245,6 +262,7 @@ RQA = [RQA2, RQA3, RQA5, RQA7, RQA9, RQA10]
 
 W60 =  {'name':'W-60', #3,97 Al + 0,27 Cu
          'kV': 60,
+         'HVL_Cu_DB' : 0.18,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':3.97,
@@ -255,6 +273,7 @@ W60 =  {'name':'W-60', #3,97 Al + 0,27 Cu
 
 W80 =  {'name':'W-80', #4,18 Al + 0,49 Cu
          'kV': 80,
+         'HVL_Cu_DB' : 0.35,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Al':4.18,
@@ -265,6 +284,7 @@ W80 =  {'name':'W-80', #4,18 Al + 0,49 Cu
 
 W110 =  {'name':'W-110', #4,18 Al + 2,04 Cu
          'kV': 110,
+         'HVL_Cu_DB' : 0.96,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.18,
@@ -275,6 +295,7 @@ W110 =  {'name':'W-110', #4,18 Al + 2,04 Cu
 
 W150 =  {'name':'W-150', #4,16 Al + 1,0 Sn
          'kV': 150,
+         'HVL_Cu_DB' : 1.84,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.16,
@@ -285,6 +306,7 @@ W150 =  {'name':'W-150', #4,16 Al + 1,0 Sn
 
 W200 =  {'name':'W-200', #4,19 Al + 2,0 Sn
          'kV': 200,
+         'HVL_Cu_DB' : 3.07,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.19,
@@ -295,6 +317,7 @@ W200 =  {'name':'W-200', #4,19 Al + 2,0 Sn
 
 W250 =  {'name':'W-250', #4,18 Al + 4,0 Sn
          'kV': 250,
+         'HVL_Cu_DB' : 4.23,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.18,
@@ -305,6 +328,7 @@ W250 =  {'name':'W-250', #4,18 Al + 4,0 Sn
 
 W300 =  {'name':'W-300', #4,18 Al + 6,5 Sn
          'kV': 250,
+         'HVL_Cu_DB' : 5.13,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.18,
@@ -315,8 +339,18 @@ W300 =  {'name':'W-300', #4,18 Al + 6,5 Sn
 
 ISO_W_ME = [W60, W80, W110, W150, W200, W250, W300]
 
+H60 =   {'name':'H-60', #3.88 Al
+         'kV': 60,
+         'HVL_Cu_DB' : 0.082,
+         'physics':'casim',
+         'dk': 0.5, #energy bin width,
+         'filters': {'Al':3.88,
+                     }
+         }
+
 H100 =  {'name':'H-100', #4,27 Al + 0,15 Cu
          'kV': 100,
+         'HVL_Cu_DB' : 0.29,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.27,
@@ -327,6 +361,7 @@ H100 =  {'name':'H-100', #4,27 Al + 0,15 Cu
 
 H200 =  {'name':'H-200', #4,26 Al + 1,11 Cu
          'kV': 200,
+         'HVL_Cu_DB' : 1.61,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.26,
@@ -337,6 +372,7 @@ H200 =  {'name':'H-200', #4,26 Al + 1,11 Cu
 
 H250 =  {'name':'H-250', #4,18 Al + 1,63 Cu
          'kV': 250,
+         'HVL_Cu_DB' : 2.44,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.18,
@@ -347,6 +383,7 @@ H250 =  {'name':'H-250', #4,18 Al + 1,63 Cu
 
 H300 =  {'name':'H-300', #4,18 Al + 2,21 Cu
          'kV': 300,
+         'HVL_Cu_DB' : 3.22,
          'physics':'casim',
          'dk': 1.0, #energy bin width,
          'filters': {'Al':4.18,
@@ -359,6 +396,7 @@ ISO_H_ME = [H100, H200, H250, H300]
 
 CCRI_100 =  {'name':'CCRI-100', #3,82Al
              'kV': 100,
+             'HVL_Al_DB' : 4.05,
              'physics':'casim',
              'dk': 0.5, #energy bin width,
              'filters': {'Al':3.82,
@@ -368,6 +406,7 @@ CCRI_100 =  {'name':'CCRI-100', #3,82Al
 
 CCRI_135 =  {'name':'CCRI-135', #2,47Al + 0,21Cu
              'kV': 135,
+             'HVL_Cu_DB' : 0.49,
              'physics':'casim',
              'dk': 1.0, #energy bin width,
              'filters': {'Al':2.47,
@@ -378,6 +417,7 @@ CCRI_135 =  {'name':'CCRI-135', #2,47Al + 0,21Cu
 
 CCRI_180 =  {'name':'CCRI-180', #3,16Al + 0,49Cu
              'kV': 180,
+             'HVL_Cu_DB' : 0.98,
              'physics':'casim',
              'dk': 1.0, #energy bin width,
              'filters': {'Al':3.16,
@@ -388,6 +428,7 @@ CCRI_180 =  {'name':'CCRI-180', #3,16Al + 0,49Cu
 
 CCRI_250 =  {'name':'CCRI-250', #3,26Al + 1,68Cu
              'kV': 250,
+             'HVL_Cu_DB' : 2.48,
              'physics':'casim',
              'dk': 1.0, #energy bin width,
              'filters': {'Al':3.26,

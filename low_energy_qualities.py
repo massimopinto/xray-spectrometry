@@ -10,6 +10,7 @@ Created on Wed Dec  2 14:18:33 2020
 
 CCRI10 =  {'name':'CCRI-10',
             'kV': 10,
+            'HVL_Al_DB' : 0.03,
             'physics':'spekcalc',
             'dk': 0.2, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -19,6 +20,7 @@ CCRI10 =  {'name':'CCRI-10',
 
 CCRI25 =  {'name':'CCRI-25',
             'kV': 25,
+            'HVL_Al_DB' : 0.25,
             'physics':'casim',
             'dk': 0.2, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -29,6 +31,7 @@ CCRI25 =  {'name':'CCRI-25',
 
 CCRI30 =  {'name':'CCRI-30',
             'kV': 30,
+            'HVL_Al_DB' : 0.18,
             'physics':'casim',
             'dk': 0.2, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -39,6 +42,7 @@ CCRI30 =  {'name':'CCRI-30',
 
 CCRI50a =  {'name':'CCRI-50a',
             'kV': 50,
+            'HVL_Al_DB' : 2.51,
             'physics':'casim',
             'dk': 0.5, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -49,6 +53,7 @@ CCRI50a =  {'name':'CCRI-50a',
 
 CCRI50b =  {'name':'CCRI-50b',
             'kV': 50,
+            'HVL_Al_DB' : 1.04,            
             'physics':'casim',
             'dk': 0.5, #energy bin width,
             'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -61,6 +66,7 @@ CCRI_LE = [CCRI10, CCRI25, CCRI30, CCRI50a, CCRI50b]
 
 N10 =  {'name':'N-10',
          'kV': 10,
+         'HVL_Al_DB' : 0.05,
          'physics':'spekcalc',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -71,6 +77,7 @@ N10 =  {'name':'N-10',
 
 N15 =  {'name':'N-15',
          'kV': 15,
+         'HVL_Al_DB' : 0.15,
          'physics':'spekcalc',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -81,6 +88,7 @@ N15 =  {'name':'N-15',
 
 N20 =  {'name':'N-20',
          'kV': 20,
+         'HVL_Al_DB' : 0.35,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -91,6 +99,7 @@ N20 =  {'name':'N-20',
 
 N25 =  {'name':'N-25',
          'kV': 25,
+         'HVL_Al_DB' : 0.66,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -101,6 +110,7 @@ N25 =  {'name':'N-25',
 
 N30 =  {'name':'N-30',
          'kV': 30,
+         'HVL_Al_DB' : 1.2,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -111,6 +121,7 @@ N30 =  {'name':'N-30',
 
 N40 =  {'name':'N-40',
          'kV': 40,
+         'HVL_Al_DB' : 2.7,
          'physics':'casim',
          'dk': 0.5, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -124,6 +135,7 @@ ISO_N_LE = [N10, N15, N20, N25, N30, N40]
 
 H20 =  {'name':'H-20',
          'kV': 20,
+         'HVL_Al_DB' : 0.11,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -134,6 +146,7 @@ H20 =  {'name':'H-20',
 
 H30 =  {'name':'H-30',
          'kV': 30,
+         'HVL_Al_DB' : 0.35,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -149,6 +162,7 @@ ISO_H_LE = [H20, H30]
 
 WMo23 =  {'name':'WMo-23',
          'kV': 23,
+         'HVL_Al_DB' : 0.332,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -159,6 +173,7 @@ WMo23 =  {'name':'WMo-23',
 
 WMo28 =  {'name':'WMo-28',
          'kV': 28,
+         'HVL_Al_DB' : 0.355,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -169,6 +184,7 @@ WMo28 =  {'name':'WMo-28',
 
 WMo30 =  {'name':'WMo-30',
          'kV': 30,
+         'HVL_Al_DB' : 0.364,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
@@ -179,6 +195,7 @@ WMo30 =  {'name':'WMo-30',
 
 WMo35 =  {'name':'WMo-35',
          'kV': 35,
+         'HVL_Al_DB' : 0.388,
          'physics':'casim',
          'dk': 0.2, #energy bin width,
          'filters': {'Be': 1, # Fixed filtration of the L.E. x-ray tube
